@@ -1,0 +1,54 @@
+#include<iostream>
+using namespace std;
+
+typedef struct CSNode
+{
+	int Data;
+	CSNode* lchild;
+	CSNode* rchild;
+}CSNode,*CSTree;
+
+
+void InitTree(CSTree& tree)
+{
+	tree = new CSNode;
+	tree->Data = 1;
+	tree->lchild = NULL;
+	tree->rchild = NULL;
+}
+
+void PreOrderTree(CSTree& tree)
+{
+	if (tree == NULL)
+		return;
+	cout << tree->Data << endl;
+	PreOrderTree(tree->lchild);
+	PreOrderTree(tree->rchild);
+}
+
+void CreateTree(CSTree& tree)
+{
+	int num;
+	cin >> num;
+	if (num == 0)
+		tree = NULL;
+	else
+	{
+		tree = new CSNode;
+		if (!tree)
+			exit(OVERFLOW);
+		tree->Data = num;
+		CreateTree(tree->lchild);
+		CreateTree(tree->rchild);
+	}
+	return;
+}
+
+int main()
+{
+	CSTree node;
+	InitTree(node);
+	CreateTree(node);
+	cout << endl;
+	PreOrderTree(node);
+}
